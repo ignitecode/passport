@@ -8,6 +8,7 @@ const methodOverride = require('method-override');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const accountController = require('./routes/account_controller');
 
 var app = express();
 
@@ -15,6 +16,9 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
+
+// Setup Controllers
+app.use('/accounts', accountController);
 
 
 app.use(logger('dev'));
