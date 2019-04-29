@@ -2,7 +2,7 @@
 
 echo "[INFO] Setting up project please be patient..."
 npm install
-createdb api_testing
+createdb passport
 sequelize db:migrate
 sequelize db:seed:all
 
