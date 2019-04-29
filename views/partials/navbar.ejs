@@ -7,12 +7,12 @@
  </h5>
  <nav class="my-2 my-md-0 mr-md-3">
    <a class="p-2 text-dark" href="/accounts">Bank Accounts</a>
-   <a class="p-2 text-dark" href="/credit">Credit Cards</a>
-   <a class="p-2 text-dark" href="/loans">Loans</a>
-   <a class="p-2 text-dark" href="/signup">Signup</a>
    <a class="p-2 text-dark" href="/login">Login</a>
+   <% if(typeof user !== 'undefined') { %>
+     <a class="p-2 text-dark" href="/logout">Logout</a>
+   <% } %>
  </nav>
    <a href="/signup" class="btn btn-outline-success">
-     Get Started <i class="fas fa-plus"></i>
+     Signup <i class="fas fa-plus"></i>
    </a>
 </div>

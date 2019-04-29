@@ -5,10 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
 const methodOverride = require('method-override');
+const flash = require("connect-flash");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const accountController = require('./routes/account_controller');
+const bodyParser = require('body-parser');
+
 
 var app = express();
 
@@ -17,19 +20,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
-// Setup Controllers
-app.use('/accounts', accountController);
-
-
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+// app.use(flash());
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/accounts', accountController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

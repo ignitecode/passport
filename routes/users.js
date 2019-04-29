@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const bcrypt = require('bcrypt');
 const { users } = require('../models');
 
 /**
@@ -26,8 +27,16 @@ router.get('/:id', (req, res) => {
  * Creates a new user in the database
  */
 router.post('/create', (req, res) => {
-  users.create({ ...req.body, createdAt: new Date(), updatedAt: new Date() })
-    .then(newUser => res.json(newUser));
+  console.log(req.body.password, req.body.email, req.body.username);
+  // Hash the user password
+  bcrypt.hash(req.body.password, 10, (err, hash) => {
+    users.create({
+      ...req.body,
+      password: hash,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }).then(() => res.render('login'));
+  });
 });
 
 /**
