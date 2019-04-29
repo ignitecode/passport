@@ -18,7 +18,7 @@ const guard = (req, res, next) => {
 router.get('/', guard, async (req, res) => {
   // Find all the accounts for a user
   const acc = await accounts.findAll();
-  res.render('accounts', { accounts: acc });
+  res.render('accounts', { accounts: acc, user: req.user });
 });
 
 module.exports = router;
